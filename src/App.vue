@@ -10,7 +10,6 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
-
 <Container :datas="datas" :step="step" :imageUrl="imageUrl" 
 @write="writeText=$event" :sFilter="sFilter"/>
  <button v-if="step==0" type="button" id="more" @click="[more()]">더보기</button>
@@ -24,15 +23,13 @@
 <script>
 import Container from "../src/components/Container.vue";
 import datas from "../src/assets/js/data.js";
-import axios from 'axios';
-
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   name: 'App',
   data(){
     return{
       datas:datas,
-      moreCount:0,
       step:0,
       imageUrl:"",
       writeText:"",
@@ -48,13 +45,14 @@ export default {
       this.sFilter=a;
     })
   },
+  computed:{
+    ...mapState(['name','age']),
+  },
   methods:{
+    ...mapMutations(['setMore']),
     more(){
-      axios.get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`)
-      .then((result)=>{
-        this.datas.push(result.data);
+        this.$store.dispatch('getData');
         this.moreCount++
-      }).catch(console.error())
     },
     upload(e){
       const imageFile =e.target.files;
