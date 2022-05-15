@@ -21,10 +21,16 @@
   </div>
  </div> 
 </div>
+<div v-if="step==3">
+  <MyPage/>
+</div>
 </template>
+
 <script>
 import Post from "./Post.vue";
 import FilterBox from "./FilterBox.vue";
+import MyPage from "./MyPage.vue";
+
 export default {
   name:"s_",
   data(){
@@ -44,6 +50,7 @@ export default {
   components: {
   Post:Post,
   FilterBox,
+  MyPage:MyPage
   },
   
 }

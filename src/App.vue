@@ -5,7 +5,8 @@
     </ul>
     <div></div>
     <ul  class="header-button-right">
-      <li @click="next" v-if="step!=2">Next</li>
+      <li @click="next" v-if="step==0">follower</li>
+      <li @click="next" v-if="step==1">Next</li>
       <li @click="publish" v-if="step==2">등록</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
@@ -76,13 +77,19 @@ export default {
     }
     ,
     next(){
-      if(this.step!=0){
+      if(this.step==0){
+        this.step=3
+      }else{
         this.step++
       }
     },
     cancle(){
         if(this.step!=0){
-        this.step--
+          if(this.step==3){
+            this.step=0
+        }else{
+          this.step--
+        }
       }
     }  
     }
